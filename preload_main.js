@@ -10,7 +10,7 @@ ipcRenderer.on('item:add', (e, item) => {
     const itemText = document.createTextNode(item);
     li.appendChild(itemText);
     ul.appendChild(li);
-
+/** */
     // Remove Item handler
     ul.addEventListener('dblclick', (e) => {
         // console.log("dbclick");
