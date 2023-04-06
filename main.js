@@ -6,7 +6,6 @@ const { Script } = require('vm');
 
 
 let mainWindow;
-let addWindow;
 
 //Listen for app to be ready 
 app.on('ready', function () {
@@ -41,30 +40,22 @@ const mainMenuTemple = [{
     label: 'File',
     submenu: [
         {
-            label: 'Add Item',                       //Etikett,  für das Hinzufügen von Artikeln
-            accelerator: process.platform == 'darwin' ? 'Command+S' :     
-                'Ctrl+S',  
-            click() {
-                createAddWindow();
-            }
+            label: 'Clear Items',
+            click(){mainWindow.webContents.send('item:clear') }
         },
         {
-            label: 'Clear Items',
-            click(){
-                mainWindow.webContents.send('item:clear')
-            }
-        },
+            label: 'Save List',
+    accelerator: process.platform == 'darwin' ? 'Command+S' : 'Ctrl+S',
+            click() {saveToFile(); }
+          },
         {
             label: 'Quit',
             accelerator: process.platform == 'darwin' ? 'Command+Q':
                 'Ctrl+Q',
-            click() {
-                app.quit();
-            }
+            click() {app.quit(); }
         }
     ]
-}
-];
+}];
 
 // If mac, add empty object to menu
 if (process.platform == 'darwin') {
